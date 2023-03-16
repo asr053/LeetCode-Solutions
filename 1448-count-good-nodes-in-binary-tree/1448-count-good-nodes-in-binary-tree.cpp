@@ -12,15 +12,17 @@
 class Solution {
 public:
     int cnt = 0;
-    int fn(TreeNode* root,int mx){
-        if(root==NULL)return 0;
-        int res =0;
-        if(root->val>=mx)res++;
+    void fn(TreeNode* root,int mx){
+        if(root==NULL)return ;
+     
+        if(root->val>=mx)cnt++;
         mx = max(mx,root->val);
-        res += (fn(root->left,mx))+fn(root->right,mx);
-        return res;
+         (fn(root->left,mx));
+        fn(root->right,mx);
+        
     }
     int goodNodes(TreeNode* root) {
-        return fn(root,INT_MIN);
+         fn(root,INT_MIN);
+        return cnt;
     }
 };
