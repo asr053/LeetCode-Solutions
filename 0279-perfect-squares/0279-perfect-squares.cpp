@@ -1,16 +1,19 @@
-class Solution {
+class Solution 
+{
 public:
-    int numSquares(int n) {
-        int x = sqrt(n);
-        vector<int>dp(n+1);
-        for(int i=0;i<=n;i++)dp[i]=i;
-        for(int i=1;i<=n;i++){
-            int val=dp[i];
-            for(int j=1;j*j<=i;j++){
-                val = min(val,1+dp[i-j*j]);
-            }
-            dp[i]=min(dp[i],val);
-        }
-        return dp[n];
+    int numSquares(int n) 
+    {
+        auto isqrt = [](int n) { return (int)floor(sqrt(n)); };
+        
+        if (pow(isqrt(n),2) == n) return 1;
+        
+        for (int i = 1; i <= isqrt(n); ++i)
+            if (n - i*i == pow(isqrt(n - i*i),2))
+                return 2;
+                
+        while (n % 4 == 0) n /= 4;
+        if   (n % 8 != 7) return 3; 
+                
+        return 4;
     }
 };
