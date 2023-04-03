@@ -8,7 +8,17 @@ public:
         fn(index+1,nums,curr);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-        fn(0,nums,{});
+      int n = (1<<nums.size())-1;
+        for(int i=0;i<=n;i++){
+            int ind = 0;
+            int k = i;
+            vector<int>curr;
+            while(k){
+                if(k%2)curr.push_back(nums[ind]);
+                ind++;k/=2;
+            }
+            res.push_back(curr);
+        }
         return res;
     }
 };
