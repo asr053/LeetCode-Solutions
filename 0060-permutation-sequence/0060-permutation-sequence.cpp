@@ -8,22 +8,21 @@ public:
     return res;
 }
     string getPermutation(int n, int k) {
-        set<int>unused , used;
-        for(int i=1;i<=n;i++)unused.insert(i);
+        vector<int> unused(n+1,1),used(n+1,0);
+     
         int total = 0;
         string res = "";
         for(int i=1;i<=n;i++){
-            set<int>temp;
+            int p = 1;
+            while(unused[p]!=1)p++;
             while(fn(n-i)+total<k){
-                auto it = unused.begin();
-                temp.insert(*(it));
-                unused.erase(*(it));
+                p++;
+                 while(unused[p]!=1)p++;
                 total += fn(n-i);
             }
-            auto it = unused.begin();
-            res +=( (*it)+'0');
-            for(auto it:temp)unused.insert(it);
-            used.insert(*(it)); unused.erase(*(it));
+            //cout<<p<<endl;
+            unused[p]=0;used[p]=1;
+            res += (p+'0');
         }
         return res;
     }
