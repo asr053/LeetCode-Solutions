@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //problem of the day
     bool isBipartite(vector<vector<int>>& graph) {
     int n = graph.size();
     vector<int> color(n); // 0: uncolored; 1: color A; -1: color B
