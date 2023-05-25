@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //problem of the day
     double new21Game(int N, int K, int W) {
         if (K == 0 || N >= K + W) return 1.0;
         vector<double> dp(N + 1);
