@@ -19,4 +19,4 @@ public:
     	    reverse(nums.begin() + k + 1, nums.end());
         }
     }
-}; 
+};
