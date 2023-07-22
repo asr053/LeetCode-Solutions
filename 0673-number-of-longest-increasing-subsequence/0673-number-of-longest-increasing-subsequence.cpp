@@ -9,8 +9,9 @@ public:
                 if(nums[i]>nums[j]){
                     //   if(dp[i].first == dp[j].first + 1)dp[i].second += dp[j].second;
                     // if(dp[i].first < dp[j].first + 1)dp[i] = {dp[j].first + 1, dp[j].second};
-                      if(dp[j].first+1==dp[i].first)dp[i].second+=dp[j].second;
-                   else if(dp[j].first+1>dp[i].first){dp[i]=dp[j];dp[i].first++;}
+                     
+                  if(dp[j].first+1>dp[i].first){dp[i]=dp[j];dp[i].first++;}
+                  else  if(dp[j].first+1==dp[i].first)dp[i].second+=dp[j].second;
                    
                 }
             }
