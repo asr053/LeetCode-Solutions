@@ -1,44 +1,25 @@
 class Solution {
 public:
     int findNumberOfLIS(vector<int>& nums) {
-        int n = nums.size();
-
-        vector <int> dplen(n, 0);
-        vector <int> dpcount(n, 0);
-        dplen[0] = 1;
-        dpcount[0] = 1;
-
-        int maxlen = 1;
-        int maxcount = 1;
-
-        for(int i=1; i<n; i++){
-            int ilen = 1, icount = 1;
-            
-            for(int j=0; j<i; j++){
-                if (nums[j] < nums[i]){
-                    if (dplen[j]+1 > ilen){
-                        ilen = dplen[j]+1;
-                        icount = dpcount[j];
-                    }
-                    else if (dplen[j]+1 == ilen){
-                        icount += dpcount[j];
-                    }
-                    
+        vector<pair<int,int>> dp(nums.size(),{0,0});
+        dp[0]={1,1};
+        for(int i=1;i<nums.size();i++){
+             dp[i]={1,1};
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    //   if(dp[i].first == dp[j].first + 1)dp[i].second += dp[j].second;
+                    // if(dp[i].first < dp[j].first + 1)dp[i] = {dp[j].first + 1, dp[j].second};
+                      if(dp[j].first+1==dp[i].first)dp[i].second+=dp[j].second;
+                    if(dp[j].first+1>dp[i].first){dp[i]=dp[j];dp[i].first++;}
+                   
                 }
             }
-            
-            dplen[i] = ilen;
-            dpcount[i] = icount;
-
-            if(maxlen<ilen){
-                maxlen = ilen;
-                maxcount = icount;
-            }
-            else if(maxlen==ilen){
-                maxcount += icount;
-            }
         }
-
-        return maxcount;
+        int re = 0, len = 0;
+        for(auto it:dp){
+            if(it.first>len)len=it.first,re=it.second;
+            else if(it.first==len)re+=it.second;
+        }
+        return re;
     }
 };
